@@ -11,11 +11,12 @@ class RomaniaState:
     romania_graph = Graph.build_graph("romania.graph")
     sld_matrix = sld.build_sld_matrix()
 
-    def __init__(self, loc=None, f_cost=0, g_cost=0, prev=None) :
+    def __init__(self, loc=None, f_cost=0, g_cost=0, prev=None, goal ="Bucharest") :
         self.loc = loc
         self.f_cost = f_cost
         self.g_cost = g_cost
         self.prev = prev
+        self.goal = goal        # Added to track user's goal
 
     def __hash__(self):
         return self.__repr__().__hash__()
@@ -46,5 +47,6 @@ class RomaniaState:
             slist.append(RomaniaState(edge[0],
                                       0,
                                       self.g_cost + edge[1],
-                                      self))
+                                      self,
+                                      self.goal))       # Pass self.goal
         return slist
